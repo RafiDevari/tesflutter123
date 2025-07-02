@@ -13,50 +13,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const halamanLain(),
+      home: const home(),
     );
   }
 }
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            const Text(
-              'Tombol',
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => halamanLain()),
-                );
-              },
-              child: Text(  
-                'tombol', // Placeholder for counter value
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 
 class halamanLain extends StatelessWidget {
   const halamanLain({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,12 +32,33 @@ class halamanLain extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const home()));
               },
               child: Text('Kembali'),
             ),
           ],
         )
+      ),
+    );
+  }
+}
+
+class home extends StatelessWidget{
+  const home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const halamanLain()),
+            );
+          },
+          child: Text('Buka Halaman Lain'),
+        ),
       ),
     );
   }
