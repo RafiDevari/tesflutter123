@@ -28,43 +28,72 @@ class DetailScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Center(
-                    child: SizedBox(
-                      height: 200,
-                      child: SoilCard(
-                        soilTemp: "22°C",
-                        outsideTemp: "60°F",
-                        humidity: "60%",
-                        devices: "3",
-                      ),
+                    child:
+                    Column(
+                      children: [
+                        Text('IOT',
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 200,
+                          child: SoilCard(
+                            soilTemp: "22°C",
+                            outsideTemp: "60°F",
+                            humidity: "60%",
+                            devices: "3",
+                          ),
+                        ),
+                      ],
+                    )
+                  ),
+                  SizedBox(height: 20),
+                  Text('Room',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 20),
                   Center(child: RoomSection()),
                   SizedBox(height: 20),
-                  Row(
-                    children: const [
-                      RoutineCard(
-                        color: Color(0XFFFAA23B),
-                        icon: Icons.sunny,
-                        title: 'Morning',
-                        iconColor: Colors.black,
+
+                  Column(
+                    children: [
+                      Text('Routine',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
                       ),
-                      SizedBox(width: 20),
-                      RoutineCard(
-                        color: Color(0XFF3F3F3F),
-                        icon: Icons.logout,
-                        title: 'Afternoon',
-                        iconColor: Color(0XFFFDA43C),
+                      Row(
+                        children: [
+                          RoutineCard(
+                            color: Color(0XFFFAA23B),
+                            icon: Icons.sunny,
+                            title: 'Morning',
+                            iconColor: Colors.black,
+                          ),
+                          SizedBox(width: 20),
+                          RoutineCard(
+                            color: Color(0XFF3F3F3F),
+                            icon: Icons.logout,
+                            title: 'Afternoon',
+                            iconColor: Color(0XFFFDA43C),
+                          ),
+                        ],
                       ),
-                    ],
+                    ]
                   ),
-                  const SizedBox(height: 20),
+
+                  SizedBox(height: 20),
                 ],
               ),
             ),
           ),
 
-          const DeviceNav(),
+          DeviceNav(),
         ],
       ),
     );

@@ -37,11 +37,25 @@ class RoomSection extends StatelessWidget {
           child: buildButton("NPK Sensor"),
         ),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ControlPanel(),
+              ),
+            );
+          },
           child: buildButton("Temperature"),
         ),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ControlPanel(),
+              ),
+            );
+          },
           child: buildButton("Drawing Room"),
         ),
       ],

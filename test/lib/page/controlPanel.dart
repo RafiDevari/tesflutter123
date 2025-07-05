@@ -13,7 +13,7 @@ class ControlPanel extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Color(0xFFF88C8C), Color(0xFF000000)],
+            colors: [Color(0xFFCB9191), Color(0xFF000000)],
           ),
         ),
         child: Padding(
