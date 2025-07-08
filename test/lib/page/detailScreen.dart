@@ -6,67 +6,71 @@ import '../component/roomSection.dart';
 import '../component/routineCard.dart';
 
 class DetailScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color(0xFFCB9191),
-                  Color(0xFF000000),
-                ],
+          SizedBox.expand(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFFCB9191),
+                    Color(0xFF000000),
+                  ],
+                ),
               ),
-            ),
-            child: Padding(
-              padding: EdgeInsets.only(top: 100.0, left: 30.0, right: 30.0),
-              child: Column(
-                children: [
-                  Center(
-                    child:
-                    Column(
-                      children: [
-                        Text('IOT',
-                          style: TextStyle(
-                            fontSize: 25,
-                            color: Colors.white,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 200,
-                          child: SoilCard(
-                            soilTemp: "22°C",
-                            outsideTemp: "60°F",
-                            humidity: "60%",
-                            devices: "3",
-                          ),
-                        ),
-                      ],
-                    )
-                  ),
-                  SizedBox(height: 20),
-                  Text('Room',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Center(child: RoomSection()),
-                  SizedBox(height: 20),
-
-                  Column(
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      top: 100.0, left: 30.0, right: 30.0, bottom: 100.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Routine',
+                      Center(
+                        child: Column(
+                          children: [
+                            Text(
+                              'IOT',
+                              style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 200,
+                              child: SoilCard(
+                                soilTemp: "22°C",
+                                outsideTemp: "60°F",
+                                humidity: "60%",
+                                devices: "3",
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        'Room',
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.white,
                         ),
                       ),
+                      Center(child: RoomSection()),
+                      SizedBox(height: 20),
+                      Text(
+                        'Routine',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(height: 10),
                       Row(
                         children: [
                           RoutineCard(
@@ -84,15 +88,13 @@ class DetailScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                    ]
+                      SizedBox(height: 20),
+                    ],
                   ),
-
-                  SizedBox(height: 20),
-                ],
+                ),
               ),
             ),
           ),
-
           DeviceNav(),
         ],
       ),
