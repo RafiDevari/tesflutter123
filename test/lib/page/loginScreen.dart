@@ -15,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> login(String email, String password) async {
     final result = await ApiService.login(email, password);
-    debugPrint('Login resulaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaat: $result');
+    debugPrint('Login resulaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaat: $result');
 
     if (result['success']) {
       final token = result['data']['access_token'];
