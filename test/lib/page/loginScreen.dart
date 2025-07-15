@@ -1,8 +1,60 @@
 import 'package:flutter/material.dart';
+import '../service/apiService.dart';
 import 'detailScreen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  Future<void> login(String email, String password) async {
+    final result = await ApiService.login(email, password);
+    debugPrint('Login resulaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaat: $result');
+
+    if (result['success']) {
+      final token = result['data']['access_token'];
+      final user = result['data']['user'];
+
+      print('Login successful');
+      print('User: ${user['name']}');
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => DetailScreen()),
+      );
+    } else {
+      _showErrorDialog(result['message']);
+    }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text('Login Failed'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,6 +161,7 @@ class LoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: TextField(
+                          controller: _emailController,
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             hintText: 'Email ID',
@@ -135,6 +188,7 @@ class LoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: TextField(
+                          controller: _passwordController,
                           obscureText: true,
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
@@ -159,12 +213,9 @@ class LoginScreen extends StatelessWidget {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailScreen(),
-                              ),
-                            );
+                            String email = _emailController.text.trim();
+                            String password = _passwordController.text.trim();
+                            login(email, password);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color(0xFFFDA43C),
