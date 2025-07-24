@@ -32,7 +32,6 @@ class _CertificateScreenState extends State<CertificateScreen> {
         throw Exception('Failed to load data');
       }
     } catch (e) {
-      print("Error: $e");
       setState(() => isLoading = false);
     }
   }
