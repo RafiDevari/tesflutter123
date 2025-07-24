@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:test/page/certificateScreen.dart';
 import 'package:test/page/controlPanel.dart';
 
 class RoomSection extends StatelessWidget {
@@ -57,6 +60,17 @@ class RoomSection extends StatelessWidget {
             );
           },
           child: buildButton("Drawing Room"),
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CertificateScreen(),
+              ),
+            );
+          },
+          child: buildButton("Sertifikat"),
         ),
       ],
     );

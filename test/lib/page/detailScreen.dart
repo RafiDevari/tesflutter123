@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test/component/deviceNav.dart';
 
 import '../component/SoilCard.dart';
@@ -6,8 +7,16 @@ import '../component/roomSection.dart';
 import '../component/routineCard.dart';
 
 class DetailScreen extends StatelessWidget {
+  Future<void> _loadAccessToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('access_token') ?? 'No token found';
+    debugPrint('Access Token: $token');  // This prints to your debug console
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    _loadAccessToken();
     return Scaffold(
       body: Stack(
         children: [

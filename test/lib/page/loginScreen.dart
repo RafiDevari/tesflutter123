@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../service/apiService.dart';
 import 'detailScreen.dart';
 
@@ -20,9 +21,9 @@ class _LoginScreenState extends State<LoginScreen> {
     if (result['success']) {
       final token = result['data']['access_token'];
       final user = result['data']['user'];
+      final pref = await SharedPreferences.getInstance();
+      await pref.setString('access_token', token);
 
-      print('Login successful');
-      print('User: ${user['name']}');
 
       Navigator.pushReplacement(
         context,
