@@ -20,7 +20,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (result['success']) {
       final token = result['data']['access_token'];
-      final user = result['data']['user'];
       final pref = await SharedPreferences.getInstance();
       await pref.setString('access_token', token);
 

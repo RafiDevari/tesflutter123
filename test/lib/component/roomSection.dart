@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:test/page/certificateScreen.dart';
 import 'package:test/page/controlPanel.dart';
 
+import '../page/dataScreen.dart';
+
 class RoomSection extends StatelessWidget {
   const RoomSection({super.key});
 
@@ -71,6 +73,17 @@ class RoomSection extends StatelessWidget {
             );
           },
           child: buildButton("Sertifikat"),
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DataScreen(),
+              ),
+            );
+          },
+          child: buildButton("Analisis Data"),
         ),
       ],
     );

@@ -22,11 +22,21 @@ class ApiService {
       );
 
       final responseData = jsonDecode(response.body);
+      final setCookie = response.headers['set-cookie'];
 
       if (response.statusCode == 200 && responseData['meta']['code'] == 200) {
         final accessToken = responseData['data']['access_token'];
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('access_token', accessToken);
+
+        if (setCookie != null) {
+          final sessionMatch = RegExp(r'laravel_session=([^;]+)').firstMatch(setCookie);
+          if (sessionMatch != null) {
+            final laravelSession = sessionMatch.group(1);
+            await prefs.setString('laravel_session', laravelSession!);
+            debugPrint('laravel_session: $laravelSession');
+          }
+        }
         debugPrint(prefs.getString('access_token'));
         return {
           'success': true,
