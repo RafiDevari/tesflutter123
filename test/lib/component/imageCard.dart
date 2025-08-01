@@ -39,26 +39,64 @@ class ImageCard extends StatelessWidget {
           SizedBox(height: 12),
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.network(
-              fullUrl,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              errorBuilder: (context, error, stackTrace) => Container(
-                height: 200,
-                color: Colors.grey[300],
-                alignment: Alignment.center,
-                child: Icon(Icons.broken_image, color: Colors.grey[600], size: 48),
-              ),
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) return child;
-                return Container(
-                  height: 200,
-                  alignment: Alignment.center,
-                  child: CircularProgressIndicator(),
+            child: GestureDetector(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (_) => Dialog(
+                    backgroundColor: Colors.transparent,
+                    insetPadding: EdgeInsets.all(16),
+                    child: GestureDetector(
+                      onTap: () => Navigator.of(context).pop(),
+                      child: InteractiveViewer(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Image.network(
+                            fullUrl,
+                            fit: BoxFit.contain,
+                            errorBuilder: (context, error, stackTrace) => Container(
+                              color: Colors.grey[300],
+                              height: 300,
+                              alignment: Alignment.center,
+                              child: Icon(Icons.broken_image, size: 60, color: Colors.grey),
+                            ),
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Container(
+                                height: 300,
+                                alignment: Alignment.center,
+                                child: CircularProgressIndicator(),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 );
               },
+              child: Image.network(
+                fullUrl,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                errorBuilder: (context, error, stackTrace) => Container(
+                  height: 200,
+                  color: Colors.grey[300],
+                  alignment: Alignment.center,
+                  child: Icon(Icons.broken_image, color: Colors.grey[600], size: 48),
+                ),
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Container(
+                    height: 200,
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
             ),
           ),
+
         ],
       ),
     );

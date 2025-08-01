@@ -13,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _obscurePassword = true;
 
   Future<void> login(String email, String password) async {
     final result = await ApiService.login(email, password);
@@ -189,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         child: TextField(
                           controller: _passwordController,
-                          obscureText: true,
+                          obscureText: _obscurePassword,
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             hintText: 'Enter Password',
@@ -199,9 +200,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               horizontal: 12,
                               vertical: 12,
                             ),
-                            suffixIcon: Icon(
-                              Icons.lock,
-                              color: Color(0xFFFDA43C),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                                color: Color(0xFFFDA43C),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _obscurePassword = !_obscurePassword;
+                                });
+                              },
                             ),
                           ),
                         ),

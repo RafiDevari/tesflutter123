@@ -5,6 +5,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test/component/sensorCard.dart';
 
+import 'CertificateDetailScreen.dart';
 import '../component/certificateInfoCard.dart';
 import '../component/imageCard.dart';
 import '../component/minMaxCard.dart';
@@ -58,19 +59,19 @@ class _DataScreenState extends State<DataScreen> {
 
 
   Widget buildCertificateCard(Map<String, dynamic> item) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CertificateInfoCard(item: item),
-        PredictedCard(dashboardData: item['dashboard_data']),
-        MinMaxCard(dashboardData: item['dashboard_data']),
-        ImageCard(
-          url: item['dashboard_data']['e_hara']['map_filename'] ?? '',
-        ),
-        SensorCard(totalTrees: item['dashboard_data']["tot_rows"], sensorName: item['dashboard_data']["sensor_type"])
-      ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => CertificateDetailScreen(item: item),
+          ),
+        );
+      },
+      child: CertificateInfoCard(item: item),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {

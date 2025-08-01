@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test/component/deviceNav.dart';
+import 'package:test/page/loginScreen.dart';
 
 import '../component/SoilCard.dart';
 import '../component/roomSection.dart';
@@ -92,8 +93,16 @@ class DetailScreen extends StatelessWidget {
                           RoutineCard(
                             color: Color(0XFF3F3F3F),
                             icon: Icons.logout,
-                            title: 'Afternoon',
+                            title: 'Log Out',
                             iconColor: Color(0XFFFDA43C),
+                            onTap: ()  {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LoginScreen(),
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),

@@ -51,7 +51,7 @@ class ApiService {
     } catch (e) {
       return {
         'success': false,
-        'message': 'An error occurred. Please try again.',
+        'message': 'An error occurred. Please try again. $e',
       };
     }
   }
