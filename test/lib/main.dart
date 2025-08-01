@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:test/page/dataScreen.dart';
-import 'package:test/page/detailScreen.dart';
 import 'package:test/page/loginScreen.dart';
 
 void main() {
