@@ -244,7 +244,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       SizedBox(height: 24),
 
-                      // Signup Prompt
                       Center(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
