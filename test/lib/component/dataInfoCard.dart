@@ -43,7 +43,7 @@ class DataInfoCard extends StatelessWidget {
               child: Text(
                 "Total Price: ${eharaData["total_price"]}",
                 style: TextStyle(
-                  color: Colors.deepPurple,
+                  color: Colors.green,
                   fontWeight: FontWeight.w600,
                 ),
               ),

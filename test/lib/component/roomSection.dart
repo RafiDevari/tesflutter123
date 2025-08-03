@@ -14,7 +14,7 @@ class RoomSection extends StatelessWidget {
     return GridView.count(
       crossAxisCount: 2,
       crossAxisSpacing: 20,
-      mainAxisSpacing: 30,
+      mainAxisSpacing: 20,
       childAspectRatio: 2.6,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:test/service/apiService.dart';
 
 import 'CertificateDetailScreen.dart';
 import '../component/certificateInfoCard.dart';
@@ -23,29 +24,11 @@ class _DataScreenState extends State<DataScreen> {
 
   Future<void> fetchData() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('access_token') ?? '';
-      final laravelSession = prefs.getString('laravel_session') ?? '';
-
-      final response = await http.get(
-        Uri.parse('https://ehara.iopri.co.id/api/mobile/analysis-data'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Cookie': 'laravel_session=$laravelSession',
-          'Accept': 'application/json',
-        },
-      );
-
-      if (response.statusCode == 200) {
-        final jsonResponse = json.decode(response.body);
-        setState(() {
-          certificateData = jsonResponse['data']['data']; // List of items
-          isLoading = false;
-        });
-      } else {
-        final jsonResponse = json.decode(response.body);
-        debugPrint('Error: ${jsonResponse['meta']['message']}');
-      }
+      final data = await ApiService().fetchCertificateData();
+      setState(() {
+        certificateData = data;
+        isLoading = false;
+      });
     } catch (e) {
       setState(() => isLoading = false);
       print('Error fetching data: $e');

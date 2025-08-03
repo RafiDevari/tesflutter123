@@ -55,4 +55,50 @@ class ApiService {
       };
     }
   }
+
+
+  Future<List<dynamic>> fetchCertificateData() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('access_token') ?? '';
+      final laravelSession = prefs.getString('laravel_session') ?? '';
+
+      final response = await http.get(
+        Uri.parse('https://ehara.iopri.co.id/api/mobile/analysis-data'),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Cookie': 'laravel_session=$laravelSession',
+          'Accept': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(response.body);
+        return jsonResponse['data']['data'];
+      } else {
+        final jsonResponse = json.decode(response.body);
+        throw Exception(jsonResponse['meta']['message']);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+
+  Future<List<dynamic>> fetchCertificate() async {
+    try {
+      final response = await http.get(Uri.parse(
+        'https://ehara.iopri.co.id/api/datatable?query_name=e_hara_certificate',
+      ));
+
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(response.body);
+        return jsonResponse['data']['data'];
+      } else {
+        throw Exception('Failed to load public certificate data');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

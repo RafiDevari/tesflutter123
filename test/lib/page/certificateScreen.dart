@@ -1,6 +1,7 @@
   import 'dart:convert';
   import 'package:flutter/material.dart';
   import 'package:http/http.dart' as http;
+import 'package:test/service/apiService.dart';
 
   class CertificateScreen extends StatefulWidget {
     @override
@@ -19,22 +20,16 @@
 
     Future<void> fetchCertificateData() async {
       try {
-        final response = await http.get(Uri.parse(
-            'https://ehara.iopri.co.id/api/datatable?query_name=e_hara_certificate'));
-
-        if (response.statusCode == 200) {
-          final jsonResponse = json.decode(response.body);
-          setState(() {
-            certificateData = jsonResponse['data']['data'];
-            isLoading = false;
-          });
-        } else {
-          throw Exception('Failed to load data');
-        }
+        final data = await ApiService().fetchCertificateData();
+        setState(() {
+          certificateData = data;
+          isLoading = false;
+        });
       } catch (e) {
         setState(() => isLoading = false);
       }
     }
+
 
     Widget buildCertificateCard(Map<String, dynamic> item) {
       return Container(
@@ -103,9 +98,23 @@
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
-                      child: Text(
-                        "Data",
-                        style: TextStyle(fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.arrow_back, color: Colors.white),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                          Expanded(
+                            child: Center(
+                              child: Text(
+                                "Data",
+                                style: TextStyle(fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(height: 20),
