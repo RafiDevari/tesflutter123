@@ -1,15 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:test/component/sensorCard.dart';
 
 import 'CertificateDetailScreen.dart';
 import '../component/certificateInfoCard.dart';
-import '../component/imageCard.dart';
-import '../component/minMaxCard.dart';
-import '../component/predictedCard.dart';
 
 class DataScreen extends StatefulWidget {
   @override
@@ -96,11 +91,23 @@ class _DataScreenState extends State<DataScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(
-                    child: Text(
-                      "Data Certificate",
-                      style: TextStyle(fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.arrow_back, color: Colors.white),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            "Data Sertifikat",
+                            style: TextStyle(fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 20),
                   Expanded(
