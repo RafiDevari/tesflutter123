@@ -18,6 +18,8 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _loadAccessToken();
+    final screenWidth = MediaQuery.of(context).size.width;
+    final horizontalPadding = screenWidth >= 600 ? 60.0 : 30.0;
     return Scaffold(
       body: Stack(
         children: [
@@ -37,7 +39,7 @@ class DetailScreen extends StatelessWidget {
                 physics: BouncingScrollPhysics(),
                 child: Padding(
                   padding: EdgeInsets.only(
-                      top: 100.0, left: 30.0, right: 30.0, bottom: 100.0),
+                      top: 100.0, left: horizontalPadding, right: horizontalPadding, bottom: 100.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
